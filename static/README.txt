@@ -1,100 +1,162 @@
-# Open edX Quick Start Thumb Drive
+################################
+Open edX Quick Start Thumb Drive
+################################
 
 The files on this thumb drive will help you get started with development on
 Open edX.  Included are:
 
 - A vagrant image of a development machine
-- A clone of edx-platform, the largest edX repo
-- This README
+- Two required edX GitHub repos
+- Scripts that can install the contents of the thumb drive
+- This README.txt
+
+Installation happens in two steps:
+
+1. Install the prerequisites (Vagrant, VirtualBox and Git) onto your machine.
+2. Use the install script on this thumb drive to install Open edX.
 
 
-# Byte Sized bugs: 
+Installing prerequisites on OS X
+================================
 
-http://bit.ly/edxbugs
+If you don't have Homebrew installed, visit http://brew.sh/ for instructions
+to install it.
+
+Install homebrew cask, which lets you install vagrant and virtualbox::
+
+    $ brew install caskroom/cask/brew-cask
+    $ brew cask install vagrant virtualbox
+    $ vagrant plugin install vagrant-vbguest
+
+Installing prerequisites on Windows
+===================================
+
+TBD
 
 
-# Installing Open edX from a flash drive on OS X
+Installing Open edX from the thumb drive
+========================================
 
-- Install homebrew cask, which lets you install vagrant and virtualbox:
+The thumb drive has scripts that will install everything.  Which script you use
+depends on your operating system.  If the install script doesn't work for some
+reason, you can resort to manual steps, explained further below.
 
-`brew install caskroom/cask/brew-cask`
-`brew cask install vagrant virtualbox`
+Installing on Mac or Linux
+--------------------------
 
-- Plug in the flash drive and run:
-`vagrant box add '/Volumes/Open EDX/birch-devstack.box' --name=birch-devstack`
+In a terminal window:
+
+1. Choose a directory where you want the devstack files to live, and cd there::
+
+    $ cd /my/dev/directory
+
+2. Run the install.sh file from the thumb drive::
+
+    $ '/Volumes/OPEN EDX/install.sh'
+
+This will take about ten minutes, copying files, creating the virtual machine,
+and so on.
+
+Install on Windows
+------------------
+
+TBD
+
+Installing manually
+-------------------
+
+If the install script doesn't work, or you just like to know what is going on,
+you can install files manually from the thumb drive.  In the examples below,
+the file path to the thumb drive is shown as '/Volumes/OPEN EDX/'.  You may
+need to use a different file path on your machine.
+
+1. Choose a directory where you want the devstack files to live, and cd there::
+
+    $ cd /my/dev/directory
+
+2. Add the vagrant box::
+
+    $ vagrant box add '/Volumes/OPEN EDX/birch-devstack.box' --name=birch-devstack
 
 This copies and decompresses a full Ubuntu virtual machine with Open edX
 installed and ready to run onto your computer, so it will take a few minutes.
 (Much faster than downloading on conference wifi, though :)
 
-- Set this environment variable to make sure we'll be using the birch release,
-  rather than the default: `export OPENEDX_RELEASE=named-release/birch`
+3. Set this environment variable to make sure we'll be using the Birch release,
+   rather than the default::
 
-Note that `vagrant ssh` will later require this variable, so repeat this step in every shell you open.
+    $ export OPENEDX_RELEASE=named-release/birch
 
-- Follow the directions at https://github.com/edx/configuration/wiki/edX-Developer-Stack#installing-the-edx-developer-stack (copied below):
+Note that `vagrant ssh` will later require this variable, so repeat this step
+in every shell you open.
 
-```
-mkdir devstack
-cd devstack
-curl -L https://raw.githubusercontent.com/edx/configuration/master/vagrant/release/devstack/Vagrantfile > Vagrantfile
-vagrant plugin install vagrant-vbguest
-vagrant up
-```
+4. Make the "devstack" directory that will hold the devstack Vagrant files::
 
-`vagrant up` will take about 20 minutes the first time.
+    $ mkdir devstack
+    $ cd devstack
 
-- Once it's finished, `vagrant ssh` to log in!
+5. Copy the Vagrantfile from the thumb drive::
 
-- Within the vagrant box, `sudo su edxapp` (switch to user "edxapp")
-- Start up the learning management system (the student-facing web app): `paver devstack lms`
+    $ cp '/Volumes/OPEN EDX/Vagrantfile' .
 
-Open a browser to `localhost:8000` to view the site!
+6. Start the vagrant image, which can take up to 20 minutes::
 
-- Open a new shell, then:
-    - `export OPENEDX_RELEASE=named-release/birch`
-    - `vagrant ssh`
-    - `sudo su edxapp`
-    - `paver devstack studio` to start up the instructor-facing app
-
-Open a browser to `localhost:8001` to view the instructor-facing site!
-
-(lolz: mostly a duplicate of https://github.com/edx/configuration/wiki/edX-Developer-Stack#using-the-edx-devstack )
-
-in order to start the forums service, run:
-`sudo su forum`
-`bundle install`
-`ruby app.rb -p 18080`
-
-Updating to Master on your devstack:
-As the `vagrant` user:
-`sudo /edx/bin/update configuration master`
-# If this fails because of password vault, just run it again.
-`sudo /edx/bin/update edx-platform master`
+    $ vagrant up
 
 
-Connecting your devstack to your fork:
-On the host machine in the edx-platform repo 
-
-Running Migrations on devstack:
-`python manage.py lms --settings=devstack migrate`
+More complete manual instructions are at https://github.com/edx/configuration/wiki/edX-Developer-Stack#installing-the-edx-developer-stack
+if you need them.
 
 
+Using the devstack Vagrant image
+================================
+
+To use the devstack Vagrant image, you cd to the devstack directory we created
+during installation, and use "vagrant ssh" to ssh into the virtual machine::
+
+    $ export OPENEDX_RELEASE=named-release/birch
+    $ cd /my/dev/directory/devstack
+    $ vagrant up
+    $ vagrant ssh
+
+Now you have a command line prompt inside the virtual machine.  A few more
+steps, and you will be running the Open edX LMS::
+
+    $ sudo su edxapp
+    $ paver devstack lms
+
+Open a browser to `http://localhost:8000` to view the LMS!
+
+To run Studio, the instructor-facing application, open a new terminal window,
+then::
+
+    $ export OPENEDX_RELEASE=named-release/birch
+    $ vagrant ssh
+    $ sudo su edxapp
+    $ paver devstack studio
+
+Open a browser to `http://localhost:8001` to view Studio.
+
+To start the forums service, run::
+
+    $ export OPENEDX_RELEASE=named-release/birch
+    $ vagrant ssh
+    $ sudo su forum
+    $ bundle install
+    $ ruby app.rb -p 18080
+
+Updating to Master on your devstack::
+
+    $ export OPENEDX_RELEASE=named-release/birch
+    $ vagrant ssh
+    $ sudo /edx/bin/update configuration master
+    # If this fails because of password vault, just run it again.
+    $ sudo /edx/bin/update edx-platform master
 
 
+Useful Resources
+================
 
+Byte-Sized bugs, to get started with Open edX development: http://bit.ly/edxbugs
 
-
-### How to install from the thumb drive
-
-export OPENEDX_RELEASE=named-release/birch
-vagrant box add "$THUMB/birch-devstack.box" --name=birch-devstack
-mkdir devstack
-cd devstack
-cp "$THUMB/Vagrantfile" .
-vagrant up --no-provision
-git clone "$THUMB/edx-platform-bare" edx-platform
-git -C edx-platform remote set-url origin https://github.com/edx/edx-platform.git
-git clone "$THUMB/cs_comments_service-bare" cs_comments_service
-git -C cs_comments_service remote set-url origin https://github.com/edx/cs_comments_service.git
-vagrant provision
+More details of the devstack: https://github.com/edx/configuration/wiki/edX-Developer-Stack
