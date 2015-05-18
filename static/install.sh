@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# Install script for Open edX thumb-stack.
+# The latest version of this file is at:
+# https://github.com/edx/thumb-stack/blob/master/static/install.sh
 
 if [ ! -x "$(command -v git)" ]; then
     echo "You must install git"

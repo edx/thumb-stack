@@ -2,6 +2,8 @@
 Open edX Quick Start Thumb Drive
 ################################
 
+(The latest version of this file is at https://github.com/edx/thumb-stack/blob/master/static/README.txt)
+
 The files on this thumb drive will help you get started with development on
 Open edX.  Included are:
 
