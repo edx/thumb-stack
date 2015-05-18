@@ -85,32 +85,7 @@ Running Migrations on devstack:
 
 
 
-### How to create the thumbdrive
-
-mkdir OpenEdxThumb
-cd OpenEdxThumb
-curl -L https://raw.githubusercontent.com/edx/configuration/master/vagrant/release/devstack/Vagrantfile > Vagrantfile
-curl -L http://files.edx.org/vagrant-images/20150224-birch-devstack.box > birch-devstack.box
-git clone --bare https://github.com/edx/edx-platform.git edx-platform-bare
-git clone --bare https://github.com/edx/cs_comments_service.git cs_comments_service-bare
-cat >install.sh <<END_INSTALL
-#!/bin/bash
-
-THUMB=$(dirname "$0")
-
-echo "Thumb drive is $THUMB"
-
-if [ ! -f "$THUMB/birch-devstack.box" ]; then
-    echo "There's no birch-devstack.box there"
-    exit 1
-fi
-
-VAGRANT=$(which vagrant)
-
-if [ -z "$VAGRANT" ]; then
-    echo "You must install vagrant first"
-    exit 1
-fi
+### How to install from the thumb drive
 
 export OPENEDX_RELEASE=named-release/birch
 vagrant box add "$THUMB/birch-devstack.box" --name=birch-devstack
@@ -123,17 +98,3 @@ git -C edx-platform remote set-url origin https://github.com/edx/edx-platform.gi
 git clone "$THUMB/cs_comments_service-bare" cs_comments_service
 git -C cs_comments_service remote set-url origin https://github.com/edx/cs_comments_service.git
 vagrant provision
-END_INSTALL
-chmod +x install.sh
-
-
-### Cleaning up between tests
-cd devstack
-vagrant destroy
-cd ..
-vagrant box remove birch-devstack
-rm -rf devstack
-
-
-new: 9m48s
-old: 12m47s

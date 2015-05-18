@@ -1,18 +1,21 @@
 #!/bin/bash
 
+if [ ! -x "$(command -v git)" ]; then
+    echo "You must install git"
+    exit 1
+fi
+
+if [ ! -x "$(command -v vagrant)" ]; then
+    echo "You must install vagrant"
+    exit 1
+fi
+
 THUMB=$(dirname "$0")
 
 echo "Thumb drive is $THUMB"
 
 if [ ! -f "$THUMB/birch-devstack.box" ]; then
-    echo "There's no birch-devstack.box there"
-    exit 1
-fi
-
-VAGRANT=$(which vagrant)
-
-if [ -z "$VAGRANT" ]; then
-    echo "You must install vagrant first"
+    echo "There's no birch-devstack.box on the thumb drive?"
     exit 1
 fi
 
