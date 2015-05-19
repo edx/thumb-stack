@@ -17,6 +17,13 @@ Installation happens in two steps:
 1. Install the prerequisites (Vagrant, VirtualBox and Git) onto your machine.
 2. Use the install script on this thumb drive to install Open edX.
 
+Detailed instructions follow.
+
+NOTE: We don't currently support installation on Windows.  If you can get it
+to work with repeatable instructions, please let us know.  A difficult problem
+is the lack of usable symlink support on Windows.  A manual workaround is here:
+https://github.com/edx/edx-platform/wiki/Simplified-install-with-vagrant#dealing-with-line-endings-and-symlinks-under-windows
+
 
 Installing prerequisites on OS X
 ================================
@@ -29,20 +36,6 @@ Install homebrew cask, which lets you install vagrant and virtualbox::
     $ brew install caskroom/cask/brew-cask
     $ brew cask install vagrant virtualbox
     $ vagrant plugin install vagrant-vbguest
-
-Installing prerequisites on Windows
-===================================
-
-You will need to have a number of prerequisites installed:
-
-    * Git
-    * Vagrant
-    * VirtualBox
-    * Cygwin
-
-Each of these has a Windows installer available on their web site.  The new
-Chocolatey package manager for Windows also does a good job installing them if
-it is available on your version of Windows.
 
 
 Installing Open edX from the thumb drive
@@ -67,29 +60,6 @@ In a terminal window:
 
 This will take about ten minutes: it copies files, creates the virtual machine,
 and so on.
-
-Install on Windows
-------------------
-
-In a command prompt:
-
-1. Choose a directory where you want the devstack files to live, and cd there::
-
-    C:> cd \my\dev\directory
-
-2. Run the install.bat file from the thumb drive::
-
-    C:> e:\install.bat
-
-Note that the thumb drive might not be drive E:.  If it isn't, you can use
-Windows Explorer to see what drive letter it was assigned.
-
-This will take about ten minutes: it copies files, creates the virtual machine,
-and so on.
-
-One special note for PCs: they can have virtualization disabled in the BIOS.
-If you find that vagrant can't start the virtual machine, you may need to
-reboot into the BIOS settings, and enable virtualization.
 
 
 Installing manually
