@@ -33,7 +33,16 @@ Install homebrew cask, which lets you install vagrant and virtualbox::
 Installing prerequisites on Windows
 ===================================
 
-TBD
+You will need to have a number of prerequisites installed:
+
+    * Git
+    * Vagrant
+    * VirtualBox
+    * Cygwin
+
+Each of these has a Windows installer available on their web site.  The new
+Chocolatey package manager for Windows also does a good job installing them if
+it is available on your version of Windows.
 
 
 Installing Open edX from the thumb drive
@@ -56,13 +65,32 @@ In a terminal window:
 
     $ '/Volumes/OPEN EDX/install.sh'
 
-This will take about ten minutes, copying files, creating the virtual machine,
+This will take about ten minutes: it copies files, creates the virtual machine,
 and so on.
 
 Install on Windows
 ------------------
 
-TBD
+In a command prompt:
+
+1. Choose a directory where you want the devstack files to live, and cd there::
+
+    C:> cd \my\dev\directory
+
+2. Run the install.bat file from the thumb drive::
+
+    C:> e:\install.bat
+
+Note that the thumb drive might not be drive E:.  If it isn't, you can use
+Windows Explorer to see what drive letter it was assigned.
+
+This will take about ten minutes: it copies files, creates the virtual machine,
+and so on.
+
+One special note for PCs: they can have virtualization disabled in the BIOS.
+If you find that vagrant can't start the virtual machine, you may need to
+reboot into the BIOS settings, and enable virtualization.
+
 
 Installing manually
 -------------------

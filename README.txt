@@ -18,6 +18,9 @@ To create a thumb drive:
 
 3. The thumb drive has a README.txt that explains what to do with it.
 
+To create another thumb drive, there's no need to repeat step 1.  Just copy
+the files in step 2 again.
+
 
 Testing the install
 -------------------
