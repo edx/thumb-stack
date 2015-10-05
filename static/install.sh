@@ -18,13 +18,13 @@ THUMB=$(dirname "$0")
 
 echo "Thumb drive is $THUMB"
 
-if [ ! -f "$THUMB/birch-devstack.box" ]; then
-    echo "There's no birch-devstack.box on the thumb drive?"
+if [ ! -f "$THUMB/cypress-devstack.box" ]; then
+    echo "There's no cypress-devstack.box on the thumb drive?"
     exit 1
 fi
 
-export OPENEDX_RELEASE=named-release/birch
-vagrant box add "$THUMB/birch-devstack.box" --name=birch-devstack
+export OPENEDX_RELEASE=named-release/cypress
+vagrant box add "$THUMB/cypress-devstack.box" --name=cypress-devstack
 mkdir devstack
 cd devstack
 cp "$THUMB/Vagrantfile" .
