@@ -14,11 +14,11 @@ else
     curl -L https://raw.githubusercontent.com/edx/configuration/master/vagrant/release/devstack/Vagrantfile > thumb/Vagrantfile
 fi
 
-if [ -f thumb/birch-devstack.box ]; then
-    echo "thumb/birch-devstack.box already exists"
+if [ -f thumb/cypress-devstack.box ]; then
+    echo "thumb/cypress-devstack.box already exists"
 else
-    echo "Copying Birch box"
-    curl -L http://files.edx.org/vagrant-images/20150224-birch-devstack.box > thumb/birch-devstack.box
+    echo "Copying Cypress box"
+    curl -L http://files.edx.org/vagrant-images/cypress-devstack.box > thumb/cypress-devstack.box
 fi
 
 if [ -d thumb/edx-platform-bare ]; then

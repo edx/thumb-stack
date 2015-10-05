@@ -76,16 +76,16 @@ need to use a different file path on your machine.
 
 2. Add the vagrant box::
 
-    $ vagrant box add '/Volumes/OPEN EDX/birch-devstack.box' --name=birch-devstack
+    $ vagrant box add '/Volumes/OPEN EDX/cypress-devstack.box' --name=cypress-devstack
 
 This copies and decompresses a full Ubuntu virtual machine with Open edX
 installed and ready to run onto your computer, so it will take a few minutes.
 (Much faster than downloading on conference wifi, though :)
 
-3. Set this environment variable to make sure we'll be using the Birch release,
+3. Set this environment variable to make sure we'll be using the Cypress release,
    rather than the default::
 
-    $ export OPENEDX_RELEASE=named-release/birch
+    $ export OPENEDX_RELEASE=named-release/cypress
 
 Note that `vagrant ssh` will later require this variable, so repeat this step
 in every shell you open.
@@ -114,7 +114,7 @@ Using the devstack Vagrant image
 To use the devstack Vagrant image, you cd to the devstack directory we created
 during installation, and use "vagrant ssh" to ssh into the virtual machine::
 
-    $ export OPENEDX_RELEASE=named-release/birch
+    $ export OPENEDX_RELEASE=named-release/cypress
     $ cd /my/dev/directory/devstack
     $ vagrant up
     $ vagrant ssh
@@ -130,7 +130,7 @@ Open a browser to `http://localhost:8000` to view the LMS!
 To run Studio, the instructor-facing application, open a new terminal window,
 then::
 
-    $ export OPENEDX_RELEASE=named-release/birch
+    $ export OPENEDX_RELEASE=named-release/cypress
     $ vagrant ssh
     $ sudo su edxapp
     $ paver devstack studio
@@ -139,7 +139,7 @@ Open a browser to `http://localhost:8001` to view Studio.
 
 To start the forums service, run::
 
-    $ export OPENEDX_RELEASE=named-release/birch
+    $ export OPENEDX_RELEASE=named-release/cypress
     $ vagrant ssh
     $ sudo su forum
     $ bundle install
@@ -147,7 +147,7 @@ To start the forums service, run::
 
 Updating to Master on your devstack::
 
-    $ export OPENEDX_RELEASE=named-release/birch
+    $ export OPENEDX_RELEASE=named-release/cypress
     $ vagrant ssh
     $ sudo /edx/bin/update configuration master
     # If this fails because of password vault, just run it again.

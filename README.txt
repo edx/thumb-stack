@@ -32,4 +32,4 @@ can run it again in a realistic scenario::
     $ vagrant destroy
     $ cd ..
     $ rm -rf devstack
-    $ vagrant box remove birch-devstack
+    $ vagrant box remove cypress-devstack
