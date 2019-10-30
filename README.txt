@@ -1,6 +1,11 @@
 Thumb-Stack
 ~~~~~~~~~~~
 
+This repository has been archived and is no longer supported. Use it at your
+own risk. This repository may depend on out-of-date libraries with security
+issues, and security updates will not be provided. Pull requests against this
+repository will not be merged.
+
 Scripts to create a thumb drive with devstack installation files on it.  This
 stages all the files in a directory called "thumb".  Then you can copy those
 files to a thumb drive, or many thumb drives.
